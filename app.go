@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/1makarov/binance-nft-buy/internal/app"
-	acc "github.com/1makarov/binance-nft-buy/internal/domain/account"
-	"github.com/1makarov/binance-nft-buy/internal/pkg/account"
-	"github.com/1makarov/binance-nft-buy/internal/pkg/mysterybox"
+	"github.com/yamayo-hei/binance-api/internal/app"
+	acc "github.com/yamayo-hei/binance-api/internal/domain/account"
+	"github.com/yamayo-hei/binance-api/internal/pkg/account"
+	"github.com/yamayo-hei/binance-api/internal/pkg/mysterybox"
 	"github.com/joho/godotenv"
 	"log"
 	"os"

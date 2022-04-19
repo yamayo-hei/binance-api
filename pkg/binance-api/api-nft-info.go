@@ -3,8 +3,8 @@ package bapi
 import (
 	"encoding/json"
 	"fmt"
-	binance_struct "github.com/1makarov/binance-nft-buy/internal/domain/binance-api"
-	"github.com/1makarov/binance-nft-buy/internal/domain/mysterybox"
+	binance_struct "github.com/yamayo-hei/binance-api/internal/domain/binance-api"
+	"github.com/yamayo-hei/binance-api/internal/domain/mysterybox"
 	"github.com/valyala/fasthttp"
 	"strconv"
 )

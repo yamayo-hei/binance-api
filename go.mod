@@ -1,4 +1,4 @@
-module github.com/1makarov/binance-nft-buy
+module 	github.com/yamayo-hei/binance-api
 
 go 1.16
 

@@ -2,7 +2,7 @@ package app
 
 import (
 	"fmt"
-	"github.com/1makarov/binance-nft-buy/internal/pkg/account"
+	"github.com/yamayo-hei/binance-api/internal/pkg/account"
 	"log"
 	"time"
 )
