@@ -3,44 +3,43 @@ package app
 import (
 	"fmt"
 	"github.com/1makarov/binance-nft-buy/internal/pkg/account"
-	"github.com/1makarov/binance-nft-buy/internal/pkg/mysterybox"
-	bapi "github.com/1makarov/binance-nft-buy/pkg/binance-api"
 	"log"
 	"time"
 )
 
-func App(account *account.Account, box *mysterybox.Box) {
+type Product struct {
+	ProductID int `json:"ProductID"`
+	Amount  int    `json:"Amount"`
+}
+
+func App(account *account.Account, id int64) {
 	defer fmt.Scanf("\n")
 
-	body, err := bapi.MarshalMysteryBoxBuy(box.Box.ID, box.Quantity)
+	orderCreateBody, err := createOrderCreateBody(id)
 	if err != nil {
 		log.Fatalf("error marshal buy box: %s\n", err.Error())
 	}
-	req := account.Auth.NFTMysteryBoxGenerateRequest(body)
+	orderCreateRequest := account.Auth.orderCreateRequest(orderCreateBody)
 
-	log.Println("Waiting started successfully")
-	wait(box.Information.StartTime)
+	// log.Println("Waiting started successfully")
+	// wait(box.Information.StartTime)
 	log.Println("Start buy")
 
 	go func() {
 		for {
-			if !box.Status {
-				resp, err := account.Auth.NFTMysteryBoxBuy(req)
-				if err != nil {
-					log.Println(err)
-					continue
-				}
-				log.Println(string(resp.Body()))
-				return
-			} else {
-				return
+			resp, err := account.Auth.NFTMysteryBoxBuy(orderCreateRequest)
+			if err != nil {
+				log.Println(err)
+				continue
 			}
+			log.Println(string(resp.Body()))
+			return
 		}
 	}()
 
-	time.Sleep(6 * time.Second)
-	box.Status = true
-	time.Sleep(1 * time.Second)
+	// time.Sleep(6 * time.Second)
+	// box.Status = true
+	// time.Sleep(1 * time.Second)
 
 	fmt.Println("Purchases are completed")
 }
@@ -52,4 +51,14 @@ func wait(s int64) {
 			return
 		}
 	}
+}
+
+func createOrderCreateBody(id int64) ([]byte, error) {
+	// fmt.Print("Enter the product id: ")
+	// fmt.Fscan(os.Stdin, &number)
+	b, err := json.Marshal(Product{ProductID: id, Amount: 0.5})
+	if err != nil {
+		return nil, err
+	}
+	return b, nil
 }

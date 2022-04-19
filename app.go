@@ -31,24 +31,24 @@ func main() {
 		return
 	}
 
-	boxList, err := mysterybox.GetActiveMysteryBoxList()
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	// boxList, err := mysterybox.GetActiveMysteryBoxList()
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return
+	// }
 
-	box, err := boxList.SelectBox()
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	// box, err := boxList.SelectBox()
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return
+	// }
 
-	if err = box.InitBox(); err != nil {
-		log.Println(err)
-		return
-	}
+	// if err = box.InitBox(); err != nil {
+	// 	log.Println(err)
+	// 	return
+	// }
 
-	app.App(a, box)
+	app.App(a, os.Args[1])
 }
 
 func initEnv() error {

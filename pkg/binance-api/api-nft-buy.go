@@ -1,22 +1,39 @@
 package bapi
 
 import (
+	"fmt"
 	"encoding/json"
 	binance_struct "github.com/1makarov/binance-nft-buy/internal/domain/binance-api"
 	"github.com/valyala/fasthttp"
 )
 
 const (
-	urlNFTMysteryBoxBuy = "https://www.binance.com/bapi/nft/v1/private/nft/mystery-box/purchase"
+	orderCreateUrl = "https://www.binance.com/bapi/nft/v1/private/nft/nft-trade/order-create"
 )
 
-func (api *Api) NFTMysteryBoxGenerateRequest(body []byte) *fasthttp.Request {
+const (
+	orderQueryUrl = "https://www.binance.com/bapi/nft/v1/private/nft/nft-trade/order-query"
+)
+
+func (api *Api) orderCreateRequest(body []byte) *fasthttp.Request {
 	r := fasthttp.AcquireRequest()
 	api.request.CopyTo(r)
 	r.Header.SetMethod(fasthttp.MethodPost)
 	r.Header.SetContentType("application/json")
-	r.Header.SetRequestURI(urlNFTMysteryBoxBuy)
+	r.Header.SetRequestURI(orderCreateUrl)
 	r.SetBody(body)
+	fmt.Println(r)
+	return r
+}
+
+func (api *Api) orderQueryRequest(body []byte) *fasthttp.Request {
+	r := fasthttp.AcquireRequest()
+	api.request.CopyTo(r)
+	r.Header.SetMethod(fasthttp.MethodPost)
+	r.Header.SetContentType("application/json")
+	r.Header.SetRequestURI(orderQueryUrl)
+	r.SetBody(body)
+	fmt.Println(r)
 	return r
 }
 
