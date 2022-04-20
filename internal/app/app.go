@@ -1,21 +1,23 @@
 package app
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/yamayo-hei/binance-api/internal/pkg/account"
 	"log"
 	"time"
+
+	"github.com/yamayo-hei/binance-api/internal/pkg/account"
 )
 
 type Product struct {
-	ProductID int `json:"ProductID"`
-	Amount  int    `json:"Amount"`
+	ProductID string `json:"ProductID"`
+	Amount    string `json:"Amount"`
 }
 
-func App(account *account.Account, id int64) {
+func App(account *account.Account, id string) {
 	defer fmt.Scanf("\n")
 
-	orderCreateBody, err := createOrderCreateBody(id)
+	orderCreateBody, err := createOrderCreateBody(id, "0.5")
 	if err != nil {
 		log.Fatalf("error marshal buy box: %s\n", err.Error())
 	}
@@ -53,10 +55,10 @@ func wait(s int64) {
 	}
 }
 
-func createOrderCreateBody(id int64) ([]byte, error) {
+func createOrderCreateBody(id string, amount string) ([]byte, error) {
 	// fmt.Print("Enter the product id: ")
 	// fmt.Fscan(os.Stdin, &number)
-	b, err := json.Marshal(Product{ProductID: id, Amount: 0.5})
+	b, err := json.Marshal(Product{ProductID: id, Amount: amount})
 	if err != nil {
 		return nil, err
 	}

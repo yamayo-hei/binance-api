@@ -1,13 +1,13 @@
 package main
 
 import (
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
 	"github.com/yamayo-hei/binance-api/internal/app"
 	acc "github.com/yamayo-hei/binance-api/internal/domain/account"
 	"github.com/yamayo-hei/binance-api/internal/pkg/account"
-	"github.com/yamayo-hei/binance-api/internal/pkg/mysterybox"
-	"github.com/joho/godotenv"
-	"log"
-	"os"
 )
 
 func main() {
